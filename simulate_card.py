@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 
 def initiate_cards(n_size):
@@ -8,8 +7,6 @@ def initiate_cards(n_size):
     Parameters:
         n_size (integer): Total number of cards
     """
-
-    assert isinstance(n_size, int), "Given number is not an integer"
     
     #card_id with 0 being the update card and 
     #status with 0 being standard and 1 being upgraded
@@ -67,7 +64,20 @@ def draw_cards(n_size):
 
 
 def simulate_runs():
+
+    """
+    Given the total number of cards (total_cards), run 1000 trials and 
+    tell me how many turns until all cards are updated!
+
+    """
+
+
     total_cards = np.array([10,15,20,25,30,35])
 
-    for i in range(len(total_cards)):
-        print(draw_cards(total_cards[i]))
+    #Each column is the total number of cards
+    #Each row is a run
+    result_array = np.array([
+    [draw_cards(tc) for tc in total_cards]   # one row = all settings for a run
+    for _ in range(1000)])
+
+    return(result_array)
